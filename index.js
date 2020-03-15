@@ -4,6 +4,7 @@ const fs = require('fs');
 const fetch = require("node-fetch");
 const app = express();
 const dbDir = './db/gifs.json';
+const apiKey = fs.readFileSync('./APIkey');
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
 function shuffleArray(array) {
@@ -14,7 +15,7 @@ function shuffleArray(array) {
     return array;
 }
 
-fetch('')
+fetch(`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=rick and morty&limit=9&offset=0&rating=G&lang=en`)
     .then(res => {
         if (res.status >= 400) {
         throw new Error("Bad response from server");
