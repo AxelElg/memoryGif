@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+.game-over-screen {
+	width: fit-content;
+	margin: auto;
+	text-align: center;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -60%);
+	font-family: 'Fredoka One';
+}
+button {
+	font-family: 'Fredoka One';
+	font-size: 1rem;
+	height: 2rem;
+	border: 2px black solid;
+	padding: 0 2rem;
+	border-radius: 1rem;
+	background-color: transparent;
+	margin-top: 2rem;
+}

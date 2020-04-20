@@ -1,49 +1,60 @@
-.game-container {
-    display: inline-flex;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    padding: 0 auto;
+.game-board {
+	height: 100%;
+	width: 100%;
 }
-.game-container > * {
-    width: 190px;
-    height: 190px;
-    padding: 5px;
+.loading {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -60%);
+	font-family: sans-serif;
+	font-weight: normal;
 }
-.memory-card-up .memory-card-down {
-    transform: rotateY(180deg);
-  }
+.card-container {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	max-width: 1000px;
+	min-height: 500px;
+	margin: auto;
+}
+.card {
+	width: 120px;
+	height: 120px;
+	margin: auto;
+}
 
 .memory-card-up {
-    pointer-events: none;
-    border-radius: 5%;
-    box-shadow: 0px 0px 5px #00000030;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    transition-duration: 0.8s;
-    transform-style: preserve-3d;
+	pointer-events: none;
+	border-radius: 5%;
+	box-shadow: 0px 0px 5px #00000030;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	transition-duration: 0.8s;
+	transform-style: preserve-3d;
 }
-.memory-card-up > img{
-    display: block;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: auto;
-    height: 100%;
-    margin: 0;
+.memory-card-up > img {
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: auto;
+	height: 100%;
+	margin: 0;
 }
 .memory-card-down {
-    border-radius: 5%;
-    box-shadow: 0px 0px 5px #00000030;
-    background-color: white;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
+	border-radius: 5%;
+	box-shadow: 0px 0px 5px #00000030;
+	background-color: white;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
 }
 .memory-card-down > img {
-    display: none;
-    image-rendering: none;
+	display: none;
+	image-rendering: none;
 }

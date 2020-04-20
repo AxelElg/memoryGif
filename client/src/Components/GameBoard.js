@@ -3,10 +3,12 @@ import axios from 'axios';
 import '../Styles/GameBoard.css';
 
 export default function GameBoard(props) {
+	const { lives, setLives, setGameState } = props;
+
 	const [cards, setCards] = useState([]);
 	const [playObj, setPlayObj] = useState([]);
 	const [playerTurn, setPlayTurn] = useState(true);
-	// const [gameResolved, setGameResolved] = useState(false);
+	const [gameOngoing, setGameOngoing] = useState(false);
 
 	useEffect(() => {
 		axios
@@ -19,12 +21,14 @@ export default function GameBoard(props) {
 						{
 							id: i,
 							gif: url,
-							cardUp: false
-						}
+							cardUp: false,
+						},
 					]);
 				});
+			})
+			.then(() => {
+				setGameOngoing(true);
 			});
-		setPlayObj([]);
 	}, []);
 
 	function flipCard(card, playObj) {
@@ -38,8 +42,10 @@ export default function GameBoard(props) {
 		const cardsInPlay = JSON.parse(JSON.stringify(playCards));
 		setTimeout(() => {
 			if (cardsInPlay[0].gif === cardsInPlay[1].gif) {
-				//reverses the order of cards depending on index
-				(cardsInPlay[0].id < cardsInPlay[1].id ? cardsInPlay.reverse() : cardsInPlay).forEach(obj =>
+				(cardsInPlay[0].id < cardsInPlay[1].id
+					? cardsInPlay.reverse()
+					: cardsInPlay
+				).forEach(obj =>
 					cards.splice(
 						cards.findIndex(card => card.id === obj.id),
 						1
@@ -49,7 +55,7 @@ export default function GameBoard(props) {
 				cardsInPlay
 					.map(obj => cards.findIndex(card => card.id === obj.id))
 					.forEach(index => (cards[index].cardUp = false));
-				props.setLives(props.lives - 1);
+				setLives(lives - 1);
 			}
 			setPlayTurn(true);
 		}, 1200);
@@ -58,36 +64,33 @@ export default function GameBoard(props) {
 	}
 
 	const GameOnDisplay = (
-		<div className="game-container">
-			{playObj.length === 2 ? determinePair(playObj) : ''}
-			{cards.length > 0
-				? cards.map(card => (
-						<div className="card" onClick={playerTurn ? () => flipCard(card, playObj) : ''}>
-							<div className={card.cardUp ? 'memory-card-up' : 'memory-card-down'} id={card.id}>
+		<div className="game-board">
+			{cards.length > 0 ? (
+				<div className="card-container">
+					{cards.map(card => (
+						<div
+							className="card"
+							onClick={playerTurn ? () => flipCard(card, playObj) : ''}
+						>
+							<div
+								className={card.cardUp ? 'memory-card-up' : 'memory-card-down'}
+								id={card.id}
+							>
 								<img srcSet={card.gif}></img>
 							</div>
 						</div>
-				  ))
-				: '...Loading'}
+					))}
+				</div>
+			) : (
+				<h2 className="loading">...Loading</h2>
+			)}
 		</div>
 	);
 
-	// const GameOverDisplay = (
-	// 	<div className="game-over-screen">
-	// 		{cards.length === 0 ? (
-	// 			<>
-	// 				<h1>Congratulation</h1>
-	// 				<h2>You successfully found all pairs!</h2>
-	// 			</>
-	// 		) : (
-	// 			<>
-	// 				<h1>Game Over</h1>
-	// 				<h2>you ran out of lives</h2>
-	// 			</>
-	// 		)}
-	// 		<button>play again?</button>
-	// 	</div>
-	// );
-
+	if (playObj.length === 2) determinePair(playObj);
+	if (gameOngoing && (cards.length === 0 || lives === 0)) {
+		setGameOngoing(false);
+		setGameState('after');
+	}
 	return GameOnDisplay;
 }

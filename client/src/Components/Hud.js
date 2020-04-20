@@ -10,9 +10,11 @@ export default function Hud(props) {
 
 	return (
 		<div className="hud">
-			{hpArr.map(() => (
-				<div className="hp"></div>
-			))}
+			<div className="health-bar">
+				{hpArr.map(() => (
+					<p className="hp">&hearts;</p>
+				))}
+			</div>
 		</div>
 	);
 }

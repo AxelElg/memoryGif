@@ -1,31 +1,35 @@
 import React, { useState } from 'react';
-import './Styles/App.css';
-import GameBoard from './Components/GameBoard.js';
+import StartScreen from './Components/StartScreen';
+import GameBoard from './Components/GameBoard';
 import Hud from './Components/Hud.js';
+import GameResolved from './Components/GameResolved';
+import './Styles/App.css';
 
 export default function App() {
-	const [gameOn, setGameOn] = useState(false);
+	const [gameState, setGameState] = useState('before');
 	const [lives, setLives] = useState(10);
 
-	return (
-		<div className="App">
-			{gameOn ? (
+	switch (gameState) {
+		case 'before':
+			return <StartScreen setGameState={setGameState} />;
+		case 'ongoing':
+			return (
 				<>
 					<Hud lives={lives} />
-					<GameBoard setLives={setLives} lives={lives} />
+					<GameBoard
+						setGameState={setGameState}
+						setLives={setLives}
+						lives={lives}
+					/>
 				</>
-			) : (
-				<header className="App-header">
-					<h1>Welcome to MemoryGif</h1>
-					<h3>the rules are simple and as follows</h3>
-					<ul>
-						<li>Click on a card to flip it</li>
-						<li>Try to find the same card twise to pair them up</li>
-						<li>Profit!!!!!</li>
-					</ul>
-					<button onClick={() => setGameOn(true)}>click me to start the game</button>
-				</header>
-			)}
-		</div>
-	);
+			);
+		case 'after':
+			return (
+				<GameResolved
+					lives={lives}
+					setLives={setLives}
+					setGameState={setGameState}
+				/>
+			);
+	}
 }

@@ -3,10 +3,11 @@
 	padding: 0 auto;
 }
 .App-header {
-	background-color: #282c34;
+	/* font-family: 'Comic Sans MS'; */
+	background-color: #fff5d9;
 	align-items: center;
 	justify-content: center;
 	font-size: calc(10px + 2vmin);
-	color: white;
+	color: black;
 	height: 100vh;
 }
