@@ -4,7 +4,8 @@ const path = require('path');
 const fs = require('fs');
 const fetch = require('node-fetch');
 const app = express();
-const dbDir = './db/gifs.json';
+const dbGitDir = './db/gifs.json';
+const dbLbDir = './db/leaderBoard.json';
 const apiKey = require('dotenv').config();
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
@@ -34,7 +35,7 @@ fetch(
 		return dataArr;
 	})
 	.then(data => {
-		fs.writeFileSync(dbDir, JSON.stringify(data, null, 2));
+		fs.writeFileSync(dbGitDir, JSON.stringify(data, null, 2));
 	})
 	.catch(err => console.log('Error', err.message));
 
@@ -43,7 +44,7 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 
 // An api endpoint that returns a short list of items
 app.get('/api/get-cards', (req, res) => {
-	let urls = JSON.parse(fs.readFileSync(dbDir, err => console.log(err)));
+	let urls = JSON.parse(fs.readFileSync(dbGitDir, err => console.log(err)));
 	urls = urls.concat(urls);
 	const sendData = shuffleArray(urls);
 	res.send(sendData);
@@ -52,7 +53,19 @@ app.get('/api/get-cards', (req, res) => {
 
 // Handles any requests that don't match the ones above
 app.post('/api/leader-board', (req, res) => {
-	res.sendFile(path.join(__dirname + '/client/build/index.html'));
+	function sorter(a, b) {
+		if (parseInt(a.score) > parseInt(b.score)) return -1;
+		if (parseInt(a.score) < parseInt(b.score)) return 1;
+		if (parseInt(a.time) < parseInt(b.time)) return -1;
+		if (parseInt(a.time) > parseInt(b.time)) return 1;
+	}
+	let leaderBoard = JSON.parse(
+		fs.readFileSync(dbLbDir, err => console.log(err))
+	);
+	leaderBoard.push(req.query);
+	leaderBoard.sort(sorter);
+	fs.writeFileSync(dbLbDir, JSON.stringify(leaderBoard.slice(0, 10), null, 2));
+	res.sendStatus(200);
 });
 
 const port = process.env.PORT || 5000;

@@ -2,9 +2,23 @@
 	background-color: black;
 	width: 100%;
 }
-
-.health-bar {
+.hud-content {
 	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+	display: flex;
+}
+.game-stats {
+	width: 50%;
+	display: flex;
+	justify-content: space-evenly;
+	color: white;
+}
+.game-stats > h2 {
+	width: 50%;
+}
+.health-bar {
+	width: 50%;
 	max-width: 1000px;
 	margin: 0 auto;
 	display: flex;

@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../Styles/GameBoard.css';
 
 export default function GameBoard(props) {
-	const { lives, setLives, setGameState } = props;
+	const { lives, setLives, setGameState, setTime, score, setScore } = props;
 
 	const [cards, setCards] = useState([]);
 	const [playObj, setPlayObj] = useState([]);
@@ -31,6 +31,15 @@ export default function GameBoard(props) {
 			});
 	}, []);
 
+	useEffect(() => {
+		setScore(0);
+		setTime(0);
+		const interval = setInterval(() => {
+			setTime(time => time + 1);
+		}, 1000);
+		return () => clearInterval(interval);
+	}, []);
+
 	function flipCard(card, playObj) {
 		if (playObj.length !== 2 && card !== playObj[0]) {
 			setPlayObj([...playObj, card]);
@@ -51,11 +60,13 @@ export default function GameBoard(props) {
 						1
 					)
 				);
+				setScore(score + 555.5);
 			} else {
 				cardsInPlay
 					.map(obj => cards.findIndex(card => card.id === obj.id))
 					.forEach(index => (cards[index].cardUp = false));
 				setLives(lives - 1);
+				setScore(score * 0.9);
 			}
 			setPlayTurn(true);
 		}, 1200);
