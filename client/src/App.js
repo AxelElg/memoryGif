@@ -7,7 +7,7 @@ import './Styles/App.css';
 
 export default function App() {
 	const [gameState, setGameState] = useState('before');
-	const [lives, setLives] = useState(1);
+	const [lives, setLives] = useState(10);
 	const [time, setTime] = useState(0);
 	const [score, setScore] = useState(0);
 

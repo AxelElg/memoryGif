@@ -1,0 +1,17 @@
+.leader-board {
+	width: 100%;
+	border: 1px solid black;
+	border-spacing: none;
+}
+
+.leader-board-row {
+	border-spacing: none;
+	height: 2em;
+	width: 100%;
+}
+
+.leader-board-item {
+	border-spacing: none;
+	width: 25%;
+	text-align: center;
+}

@@ -60,13 +60,13 @@ export default function GameBoard(props) {
 						1
 					)
 				);
-				setScore(score + 555.5);
+				setScore(score + 5555);
 			} else {
 				cardsInPlay
 					.map(obj => cards.findIndex(card => card.id === obj.id))
 					.forEach(index => (cards[index].cardUp = false));
 				setLives(lives - 1);
-				setScore(score * 0.9);
+				setScore(parseInt(score * 0.9));
 			}
 			setPlayTurn(true);
 		}, 1200);

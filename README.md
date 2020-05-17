@@ -21,7 +21,7 @@ only the backend communicates with Giphys API and serves only rick and morty Gif
 Express.js
 (https://expressjs.com/)
 
-###
+### FrontEnd
 
 React.js
 (https://reactjs.org/)

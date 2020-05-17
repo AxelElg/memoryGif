@@ -1,27 +1,14 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import '../Styles/GameResolved.css';
 import LeaderBoard from './LeaderBoard.js';
+import PlayerScore from './PlayerScore.js';
 
 export default function Hud(props) {
 	const { lives, setLives, setGameState, time, score } = props;
-	const [name, setName] = useState('');
-	const [sent, setSent] = useState(false);
 
 	const restartGame = () => {
 		setLives(10);
 		setGameState('ongoing');
-	};
-
-	const addScore = () => {
-		axios
-			.post(`/api/leader-board?time=${1}&&score=${score}&&name=${name}`)
-			.then(res => {
-				console.log(res);
-			})
-			.catch(err => {
-				console.log('Error: ', err);
-			});
 	};
 
 	return (
@@ -38,25 +25,7 @@ export default function Hud(props) {
 				</>
 			)}
 			<LeaderBoard />
-			<h2>Your score:</h2>
-			<table>
-				<tr>
-					<th>Score:</th>
-					<td>{score}</td>
-				</tr>
-				<tr>
-					<th>Time:</th>
-					<td>{time}</td>
-				</tr>
-				<tr>
-					<th>Your name</th>
-					<td>
-						<input type="text" onChange={e => setName(e.target.value)}></input>
-					</td>
-				</tr>
-			</table>
-
-			<button onClick={() => addScore()}>Submit Score</button>
+			<PlayerScore time={time} score={score} />
 			<button onClick={() => restartGame()}>Play Again?</button>
 		</div>
 	);

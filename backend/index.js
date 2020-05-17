@@ -51,7 +51,6 @@ app.get('/api/get-cards', (req, res) => {
 	console.log('Data Sent');
 });
 
-// Handles any requests that don't match the ones above
 app.post('/api/leader-board', (req, res) => {
 	function sorter(a, b) {
 		if (parseInt(a.score) > parseInt(b.score)) return -1;
@@ -66,6 +65,13 @@ app.post('/api/leader-board', (req, res) => {
 	leaderBoard.sort(sorter);
 	fs.writeFileSync(dbLbDir, JSON.stringify(leaderBoard.slice(0, 10), null, 2));
 	res.sendStatus(200);
+});
+app.get('/api/leader-board', (req, res) => {
+	let leaderBoard = JSON.parse(
+		fs.readFileSync(dbLbDir, err => console.log(err))
+	);
+	res.send(leaderBoard);
+	console.log('LeaderBoard Sent');
 });
 
 const port = process.env.PORT || 5000;
