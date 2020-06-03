@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../Styles/LeaderBoard.css';
 
 export default function Hud(props) {
-	const [leaderBoard, setLeaderBoard] = useState([]);
+	const { leaderBoard, setLeaderBoard } = props;
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ export default function Hud(props) {
 		return <p>Loading...</p>;
 	}
 
-	const loadingBoardBuilder = input => {
+	const leaderBoardBuilder = input => {
 		return (
 			<table className="leader-board">
 				<tr className="leader-board-row">
@@ -39,5 +39,5 @@ export default function Hud(props) {
 		);
 	};
 
-	return loadingBoardBuilder(leaderBoard);
+	return leaderBoardBuilder(leaderBoard);
 }

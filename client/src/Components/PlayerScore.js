@@ -3,18 +3,16 @@ import axios from 'axios';
 import '../Styles/PlayerScore.css';
 
 export default function Hud(props) {
-	const { time, score } = props;
+	const { time, score, setLeaderBoard } = props;
 	const [name, setName] = useState('');
 	const [sent, setSent] = useState(false);
-	console.log(time, score);
 
 	const addScore = () => {
 		axios
 			.post(`/api/leader-board?time=${time}&&score=${score}&&name=${name}`)
-			.then(res => {
-				console.log(res);
-			})
-			.then(() => {
+			.then(res => res.data)
+			.then(data => {
+				setLeaderBoard(data);
 				setSent(true);
 			})
 			.catch(err => {
