@@ -5,6 +5,7 @@ import PlayerScore from './PlayerScore.js';
 
 export default function Hud(props) {
 	const { lives, setLives, setGameState, time, score } = props;
+	const [leaderBoard, setLeaderBoard] = useState([]);
 
 	const restartGame = () => {
 		setLives(10);
@@ -24,8 +25,8 @@ export default function Hud(props) {
 					<h3>Better luck next time!</h3>
 				</>
 			)}
-			<LeaderBoard />
-			<PlayerScore time={time} score={score} />
+			<LeaderBoard leaderBoard={leaderBoard} setLeaderBoard={setLeaderBoard} />
+			<PlayerScore time={time} score={score} setLeaderBoard={setLeaderBoard} />
 			<button onClick={() => restartGame()}>Play Again?</button>
 		</div>
 	);

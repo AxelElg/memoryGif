@@ -12,7 +12,7 @@ export default function GameBoard(props) {
 
 	useEffect(() => {
 		axios
-			.get('/api/get-cards')
+			.get('/api/cards')
 			.then(res => res.data)
 			.then(data => {
 				data.forEach((url, i) => {
