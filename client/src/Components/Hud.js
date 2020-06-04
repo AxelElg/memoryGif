@@ -1,5 +1,6 @@
 import React from 'react';
 import '../Styles/Hud.css';
+import heart from '../assets/SVGs/heart.svg';
 
 export default function Hud(props) {
 	const { lives, score, time } = props;
@@ -18,7 +19,7 @@ export default function Hud(props) {
 				</div>
 				<div className="health-bar">
 					{hpArr.map(() => (
-						<p className="hp">&hearts;</p>
+						<img className="hp" src={heart} />
 					))}
 				</div>
 			</div>

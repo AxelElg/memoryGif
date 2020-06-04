@@ -5,15 +5,15 @@ export default function StartScreen(props) {
 	return (
 		<div className="start-screen">
 			<h1>Welcome to MemoryGif</h1>
-			<h2>the rules are simple and as follows</h2>
 			<ul>
-				<li>Click on a card to flip it</li>
-				<li>Try to pair up all cards</li>
-				<li>pair up all cards before you run out of hearts</li>
+				<li>Flip the cards by clicking on them to see their Gifs</li>
+				<li>
+					Pair up all cards to Win! but be aware that mismatched cards will cost
+					you one of your lives. if you lose all 10 of your lives without
+					collecting all cards you’ll lose.
+				</li>
 			</ul>
-			<button onClick={() => props.setGameState('ongoing')}>
-				click me to start the game
-			</button>
+			<button onClick={() => props.setGameState('ongoing')}>START</button>
 		</div>
 	);
 }

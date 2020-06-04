@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Card from './Card.js';
 import '../Styles/GameBoard.css';
 
 export default function GameBoard(props) {
@@ -22,6 +23,7 @@ export default function GameBoard(props) {
 							id: i,
 							gif: url,
 							cardUp: false,
+							collected: false,
 						},
 					]);
 				});
@@ -47,26 +49,15 @@ export default function GameBoard(props) {
 		}
 	}
 
-	function determinePair(playCards) {
-		const cardsInPlay = JSON.parse(JSON.stringify(playCards));
+	function determinePair() {
 		setTimeout(() => {
-			if (cardsInPlay[0].gif === cardsInPlay[1].gif) {
-				(cardsInPlay[0].id < cardsInPlay[1].id
-					? cardsInPlay.reverse()
-					: cardsInPlay
-				).forEach(obj =>
-					cards.splice(
-						cards.findIndex(card => card.id === obj.id),
-						1
-					)
-				);
+			if (playObj[0].gif === playObj[1].gif) {
+				playObj.forEach(obj => (obj.collected = true));
 				setScore(score + 5555);
 			} else {
-				cardsInPlay
-					.map(obj => cards.findIndex(card => card.id === obj.id))
-					.forEach(index => (cards[index].cardUp = false));
-				setLives(lives - 1);
+				playObj.forEach(card => (card.cardUp = false));
 				setScore(parseInt(score * 0.9));
+				setLives(lives - 1);
 			}
 			setPlayTurn(true);
 		}, 1200);
@@ -79,17 +70,12 @@ export default function GameBoard(props) {
 			{cards.length > 0 ? (
 				<div className="card-container">
 					{cards.map(card => (
-						<div
-							className="card"
-							onClick={playerTurn ? () => flipCard(card, playObj) : ''}
-						>
-							<div
-								className={card.cardUp ? 'memory-card-up' : 'memory-card-down'}
-								id={card.id}
-							>
-								<img srcSet={card.gif}></img>
-							</div>
-						</div>
+						<Card
+							playerTurn={playerTurn}
+							playObj={playObj}
+							card={card}
+							flipCard={flipCard}
+						/>
 					))}
 				</div>
 			) : (
@@ -98,10 +84,16 @@ export default function GameBoard(props) {
 		</div>
 	);
 
-	if (playObj.length === 2) determinePair(playObj);
-	if (gameOngoing && (cards.length === 0 || lives === 0)) {
+	if (
+		gameOngoing &&
+		(cards.filter(card => card.collected === false).length === 0 || lives === 0)
+	) {
 		setGameOngoing(false);
 		setGameState('after');
+	}
+
+	if (playObj.length === 2) {
+		determinePair();
 	}
 	return GameOnDisplay;
 }

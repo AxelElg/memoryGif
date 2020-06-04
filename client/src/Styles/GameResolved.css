@@ -6,13 +6,3 @@
 	text-align: center;
 	font-family: 'Fredoka One';
 }
-button {
-	font-family: 'Fredoka One';
-	font-size: 1rem;
-	height: 2rem;
-	border: 2px black solid;
-	padding: 0 2rem;
-	border-radius: 1rem;
-	background-color: transparent;
-	margin: 2rem 1rem;
-}

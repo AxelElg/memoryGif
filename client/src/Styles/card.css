@@ -1,0 +1,26 @@
+.card {
+	width: 120px;
+	height: 120px;
+	position: relative;
+	transition: transform 0.5s;
+	transform-style: preserve-3d;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	border-radius: 30px;
+	margin: 20px;
+}
+.memory-card {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	backface-visibility: hidden;
+	border-radius: 30px;
+}
+.memory-card-back {
+	transform: rotateY(180deg);
+}
+.card.card-flipped {
+	transform: rotateY(180deg);
+}
+.card-collected {
+	visibility: hidden;
+}
