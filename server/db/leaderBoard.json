@@ -20,6 +20,11 @@
     "name": "AXE"
   },
   {
+    "time": "52",
+    "score": "42962",
+    "name": "ELG"
+  },
+  {
     "time": "65",
     "score": "42800",
     "name": "hhh"
@@ -30,6 +35,11 @@
     "name": "hh"
   },
   {
+    "time": "52",
+    "score": "41541",
+    "name": "YYY"
+  },
+  {
     "time": "58",
     "score": "41508",
     "name": "XXX"
@@ -38,15 +48,5 @@
     "time": "53",
     "score": "41186",
     "name": "håy"
-  },
-  {
-    "time": "60",
-    "score": "40709",
-    "name": "yay"
-  },
-  {
-    "time": "307",
-    "score": "40043",
-    "name": "FRE"
   }
 ]

@@ -3,38 +3,35 @@
 	justify-content: space-between;
 	background-color: black;
 	width: 100%;
-	padding: 5px;
 }
 .hud-content {
 	width: 100%;
 	max-width: 1000px;
 	margin: 0 auto;
 	display: flex;
-	flex-wrap: wrap;
 }
 .game-stats {
-	min-width: 500px;
-	/* background-color: darkorange; */
+	width: 50%;
 	display: flex;
+	justify-content: space-evenly;
 	color: white;
-	justify-content: start;
 }
 .game-stats > h2 {
-	width: 250px;
+	width: 50%;
 	font-family: 'Press Start 2P';
-	font-size: 1rem;
+	font-size: 1.2em;
 }
 .health-bar {
-	width: 500px;
+	width: 50%;
 	max-width: 1000px;
+	margin: auto;
 	display: flex;
-	justify-content: right;
-	align-items: center;
+	justify-content: end;
 }
 
 .hp {
 	color: red;
 	height: 30px;
 	font-size: 2rem;
-	padding-left: 10px;
+	margin-left: 15px;
 }

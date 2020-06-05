@@ -25,25 +25,17 @@ export default function Hud(props) {
 			<h2>Your score:</h2>
 			<table className="player-score">
 				<tr>
-					<th className="player-score-item">Score:</th>
-					<td className="player-score-item">{score}</td>
-				</tr>
-				<tr>
-					<th className="player-score-item">Time:</th>
-					<td className="player-score-item">{time}</td>
-				</tr>
-				<tr>
-					<th className="player-score-item">Your name</th>
+					<td className="player-score-item">Your Score</td>
 					<td className="player-score-item">
-						{!sent ? (
-							<input
-								type="text"
-								onChange={e => setName(e.target.value)}
-							></input>
-						) : (
-							<>{name}</>
-						)}
+						<input
+							type="text"
+							maxLength="4"
+							className="ip"
+							onChange={e => setName(e.target.value)}
+						></input>
 					</td>
+					<td className="player-score-item">{score} p</td>
+					<td className="player-score-item">{time} s</td>
 				</tr>
 			</table>
 			{!sent ? <button onClick={() => addScore()}>Submit Score</button> : ''}

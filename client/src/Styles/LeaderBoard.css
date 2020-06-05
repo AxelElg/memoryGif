@@ -1,17 +1,33 @@
 .leader-board {
-	width: 100%;
-	border: 1px solid black;
+	max-width: 600px;
+	min-width: 100%;
+	/* border: 1px solid black; */
+	background-color: black;
 	border-spacing: none;
 }
 
 .leader-board-row {
 	border-spacing: none;
-	height: 2em;
+	height: 1em;
 	width: 100%;
 }
 
 .leader-board-item {
+	background-color: white;
+	grid-gap: 0;
 	border-spacing: none;
 	width: 25%;
 	text-align: center;
+	font-family: 'Press Start 2P';
+	font-size: 0.8rem;
+}
+
+.leader-board-header > .leader-board-item {
+	font-family: 'Fredoka One';
+	font-size: 1.2rem;
+	height: 1.5rem;
+}
+
+.leader-board-head {
+	background-color: white;
 }

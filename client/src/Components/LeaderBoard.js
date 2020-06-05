@@ -21,7 +21,7 @@ export default function Hud(props) {
 	const leaderBoardBuilder = input => {
 		return (
 			<table className="leader-board">
-				<tr className="leader-board-row">
+				<tr className="leader-board-header">
 					<td className="leader-board-item">Place:</td>
 					<td className="leader-board-item">Name:</td>
 					<td className="leader-board-item">Score:</td>
