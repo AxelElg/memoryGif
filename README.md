@@ -29,5 +29,4 @@ React.js
 ## Future Improvements
 
 - give user a choice for what kinds of Gifs the memory game will use (not just rick and morty once).
-- build a leader-board for players high score.
 - to launch this website and make it accessible online.
