@@ -38,3 +38,26 @@
 	font-size: 2rem;
 	padding-left: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+	.hud {
+		display: block;
+		width: 100vw;
+	}
+	.hud-content {
+		width: 100vw;
+	}
+	.game-stats {
+		width: 100vw;
+	}
+	.game-stats > h2 {
+		width: 50vw;
+		font-size: 0.8rem;
+	}
+	.health-bar {
+		margin: 0 2vw;
+	}
+	.hp {
+		padding-left: 0;
+	}
+}
