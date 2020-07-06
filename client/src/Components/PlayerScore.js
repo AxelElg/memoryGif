@@ -21,7 +21,7 @@ export default function Hud(props) {
 	};
 
 	return (
-		<>
+		<div>
 			<h2>Your score:</h2>
 			<table className="player-score">
 				<tr>
@@ -39,6 +39,6 @@ export default function Hud(props) {
 				</tr>
 			</table>
 			{!sent ? <button onClick={() => addScore()}>Submit Score</button> : ''}
-		</>
+		</div>
 	);
 }

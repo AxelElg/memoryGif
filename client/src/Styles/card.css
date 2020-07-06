@@ -24,3 +24,15 @@
 .card-collected {
 	visibility: hidden;
 }
+
+@media only screen and (max-width: 600px) {
+	.card {
+		width: 25vw;
+		height: 25vw;
+		margin: 2vw;
+		border-radius: 5vw;
+	}
+	.memory-card {
+		border-radius: 5vw;
+	}
+}
