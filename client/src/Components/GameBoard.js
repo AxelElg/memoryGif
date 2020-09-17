@@ -2,9 +2,19 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from './Card.js';
 import '../Styles/GameBoard.css';
+import determinePair from '../helpers/determinePair';
 
 export default function GameBoard(props) {
-	const { lives, setLives, setGameState, setTime, score, setScore } = props;
+	const {
+		apiKey,
+		query,
+		lives,
+		setLives,
+		setGameState,
+		setTime,
+		score,
+		setScore,
+	} = props;
 
 	const [cards, setCards] = useState([]);
 	const [playObj, setPlayObj] = useState([]);
@@ -12,8 +22,15 @@ export default function GameBoard(props) {
 	const [gameOngoing, setGameOngoing] = useState(false);
 
 	useEffect(() => {
+		setScore(0);
+		setTime(0);
 		axios
-			.get('/api/cards')
+			.get('/api/cards', {
+				params: {
+					key: apiKey,
+					query: query,
+				},
+			})
 			.then(res => res.data)
 			.then(data => {
 				data.forEach((url, i) => {
@@ -34,36 +51,13 @@ export default function GameBoard(props) {
 	}, []);
 
 	useEffect(() => {
-		setScore(0);
-		setTime(0);
-		const interval = setInterval(() => {
-			setTime(time => time + 1);
-		}, 1000);
-		return () => clearInterval(interval);
-	}, []);
-
-	function flipCard(card, playObj) {
-		if (playObj.length !== 2 && card !== playObj[0]) {
-			setPlayObj([...playObj, card]);
-			cards.find(deckCard => deckCard.id === card.id).cardUp = true;
+		if (gameOngoing) {
+			const interval = setInterval(() => {
+				setTime(time => time + 1);
+			}, 1000);
+			return () => clearInterval(interval);
 		}
-	}
-
-	function determinePair() {
-		setTimeout(() => {
-			if (playObj[0].gif === playObj[1].gif) {
-				playObj.forEach(obj => (obj.collected = true));
-				setScore(score + 5555);
-			} else {
-				playObj.forEach(card => (card.cardUp = false));
-				setScore(parseInt(score * 0.9));
-				setLives(lives - 1);
-			}
-			setPlayTurn(true);
-		}, 1200);
-		setPlayObj([]);
-		setPlayTurn(false);
-	}
+	}, [gameOngoing]);
 
 	const GameOnDisplay = (
 		<div className="game-board">
@@ -72,9 +66,10 @@ export default function GameBoard(props) {
 					{cards.map(card => (
 						<Card
 							playerTurn={playerTurn}
-							playObj={playObj}
 							card={card}
-							flipCard={flipCard}
+							cards={cards}
+							playObj={playObj}
+							setPlayObj={setPlayObj}
 						/>
 					))}
 				</div>
@@ -93,7 +88,15 @@ export default function GameBoard(props) {
 	}
 
 	if (playObj.length === 2) {
-		determinePair();
+		determinePair(
+			playObj,
+			setPlayObj,
+			score,
+			setScore,
+			lives,
+			setLives,
+			setPlayTurn
+		);
 	}
 	return GameOnDisplay;
 }
