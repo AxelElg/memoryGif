@@ -1,9 +1,9 @@
 const axios = require('axios');
 
 require('dotenv').config();
-const apiKey = process.env.apiKey;
+// const apiKey = process.env.apiKey;
 
-const getCards = async () => {
+const getCards = async (apiKey, query) => {
 	/* Randomize array in-place using Durstenfeld shuffle algorithm */
 	function shuffleArray(array) {
 		for (let i = array.length - 1; i > 0; i--) {
@@ -14,7 +14,7 @@ const getCards = async () => {
 	}
 	return await axios
 		.get(
-			`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=rick and morty&limit=9&offset=0&rating=G&lang=en`
+			`https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}y&limit=9&offset=0&rating=G&lang=en`
 		)
 		.then(res => res.data.data)
 		.then(data => data.map(element => element.images.downsized_large.url))

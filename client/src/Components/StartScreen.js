@@ -13,7 +13,7 @@ export default function StartScreen(props) {
 					collecting all cards you’ll lose.
 				</li>
 			</ul>
-			<button onClick={() => props.setGameState('ongoing')}>START</button>
+			<button onClick={() => props.setGameState('setup')}>START</button>
 		</div>
 	);
 }
