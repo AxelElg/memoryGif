@@ -1,9 +1,9 @@
 const axios = require('axios');
 
 require('dotenv').config();
-// const apiKey = process.env.apiKey;
+const myApiKey = process.env.apiKey;
 
-const getCards = async (apiKey, query) => {
+const getCards = async (query, apiKey = myApiKey) => {
 	/* Randomize array in-place using Durstenfeld shuffle algorithm */
 	function shuffleArray(array) {
 		for (let i = array.length - 1; i > 0; i--) {

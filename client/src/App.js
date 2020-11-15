@@ -8,7 +8,6 @@ import './Styles/App.css';
 
 export default function App() {
 	const [gameState, setGameState] = useState('before');
-	const [apiKey, setApiKey] = useState('');
 	const [query, setQuery] = useState('');
 	const [lives, setLives] = useState(10);
 	const [time, setTime] = useState(0);
@@ -18,19 +17,12 @@ export default function App() {
 		case 'before':
 			return <StartScreen setGameState={setGameState} />;
 		case 'setup':
-			return (
-				<Setup
-					setGameState={setGameState}
-					setApiKey={setApiKey}
-					setQuery={setQuery}
-				/>
-			);
+			return <Setup setGameState={setGameState} setQuery={setQuery} />;
 		case 'ongoing':
 			return (
 				<>
 					<Hud lives={lives} score={score} time={time} />
 					<GameBoard
-						apiKey={apiKey}
 						query={query}
 						setGameState={setGameState}
 						setLives={setLives}

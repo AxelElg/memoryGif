@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
 	try {
+		console.log(req.query);
 		updateLeaderBoard(req.query).then(result => res.send(result));
 	} catch (error) {
 		res.sendStatus(400);

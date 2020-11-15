@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function Setup(props) {
-	const { setGameState, setApiKey, setQuery } = props;
+	const { setGameState, setQuery } = props;
 
-	const [legitApi, setLegitApi] = useState(false);
+	const [queryExist, setQueryExist] = useState(false);
 	const [input, setInput] = useState('');
 
-	function checkApi() {
+	function checkQuery() {
 		if (input.length > 0) {
-			setApiKey(input);
-			setLegitApi(true);
+			setQuery(input);
+			setQueryExist(true);
 		}
 	}
 
-	if (legitApi) {
+	if (queryExist) {
 		setGameState('ongoing');
 	}
 
@@ -21,8 +21,7 @@ export default function Setup(props) {
 		<>
 			<div className="api-submission-box">
 				<input type="text" onChange={e => setInput(e.target.value)}></input>
-				<input type="text" onChange={e => setQuery(e.target.value)}></input>
-				<button onClick={() => checkApi()}></button>
+				<button onClick={() => checkQuery()}></button>
 			</div>
 		</>
 	);

@@ -6,7 +6,6 @@ import determinePair from '../helpers/determinePair';
 
 export default function GameBoard(props) {
 	const {
-		apiKey,
 		query,
 		lives,
 		setLives,
@@ -27,7 +26,6 @@ export default function GameBoard(props) {
 		axios
 			.get('/api/cards', {
 				params: {
-					key: apiKey,
 					query: query,
 				},
 			})
